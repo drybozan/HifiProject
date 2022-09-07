@@ -1,0 +1,24 @@
+﻿@model List<HiFi.Dto.SetupPictureDto>
+<div id="carouselExampleControls" class="carousel slide mx-auto" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        @foreach (var item in Model)
+        {
+            if (item.SetupPicture != null)
+            {
+                <div class="carousel-item active">
+                    <a>
+                        <img src="http://localhost:51075/Uploads/SetupPictures/@item.SetupPicture" class="d-block w-100" height="400" width="670">
+                    </a>
+                </div>
+            }
+        }
+    </div>
+    <button class="carousel-control-prev dark-version" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next dark-version" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>

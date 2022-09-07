@@ -1,0 +1,49 @@
+﻿@model List<HiFi.Dto.SetupDto>
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            <div class="row">
+                <div class="col-xl-6 col-md-6 mb-xl-0 mb-4">
+                    <div class="card card-blog card-plain">
+                        <div class="img-container">
+                            <a>
+                                <img src="~/template/assets/img/home-decor-1.jpg" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl" height="400" width="500">
+                            </a>
+                        </div>
+
+                        <div class="card-body p-3">
+                            <h5>
+                                @item.SetupName
+                            </h5>
+                            <p class="mb-4 text-sm">
+                                @item.SetupDetail
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-md-6 mb-xl-0 mb-4">
+                    @*kullanıcının componentlerini tanıttığı kısım*@
+                    <div class="card-header pb-0 p-3">
+                        <h6 class="mb-0">System Component</h6>
+                    </div>
+                    <div class="card-body p-3">
+                        @Html.Action("SetupComponentPartial", "Profile", new { id = @item.SetupId })
+                    </div>
+                </div>
+            </div>
+
+        </li>
+    }
+</ul>
+<script>
+    $(document).ready(function () {
+
+        $(".img-container").popupLightbox();
+
+    });
+</script>
+
+
+
+

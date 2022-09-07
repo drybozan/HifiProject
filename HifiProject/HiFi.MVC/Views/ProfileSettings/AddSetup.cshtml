@@ -1,0 +1,53 @@
+﻿@using HiFi.Common.Helpers
+@model  HiFi.Dto.SetupDto
+
+@using (Html.BeginForm("AddSetup", "ProfileSettings", FormMethod.Post,new {id="addSetupForm"}))
+{
+
+    <div class="form-group">
+        @(Html.TextBoxForControl(m => m.SetupName, new {  placeholder = "Setup Adı"}))
+    </div>
+    <div class="form-group">
+        @(Html.TextAreaForControl(m => m.SetupDetail, new {  placeholder = "Setup Hakkında", rows = "5" }))
+    </div>
+
+
+    @Html.HiddenFor(m => m.SetupActive)
+   
+    <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Kaydet</button>
+   
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+    </div>
+
+}
+<script>
+    $("#addSetupForm").submit(function (e) {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Değişiklikleri kaydetmek istiyor musunuz ?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Hayır',
+            confirmButtonText: 'Evet'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: this.action,
+                    type: 'post',
+                    data: new FormData(this),
+                    processData: false,
+                    contentType: false,
+                    success: function (result) {
+                        $("#modelViewforaddsetup .close").click();
+                        Swal.fire('İşlem Başarılı',
+                            result, 'success');
+                        location.reload(true);
+                    }
+                });
+            }
+        });
+    });
+</script>

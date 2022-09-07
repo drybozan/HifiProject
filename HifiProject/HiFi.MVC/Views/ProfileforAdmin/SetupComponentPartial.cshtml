@@ -1,0 +1,16 @@
+﻿
+@model List<HiFi.Dto.SetupComponentDto>
+<ul class="list-group">
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2 pt-0">
+            <div class="d-flex align-items-start flex-column justify-content-center">
+                <h6 class="mb-0 text-sm">@item.categoryName </h6>
+                <p class="mb-0 text-xs">@item.CompDetail</p>
+            </div>
+            @Html.Action("ComponentPicturePartial", "Profile", new { id = @item.CompId })
+        </li>
+    }
+</ul>
+
+

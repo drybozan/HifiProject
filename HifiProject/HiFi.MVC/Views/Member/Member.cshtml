@@ -1,0 +1,96 @@
+﻿
+@{
+    ViewBag.Title = "Member";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+@model List<HiFi.Dto.MemberDto>
+
+<title>Üyeler</title>
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="card my-4">
+                <div class="card-body px-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        <h3>Üyeler</h3>
+                                    </th>
+                                    <th class="text-secondary opacity-7"></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < Model.Count() / 2; i++)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div>
+                                                    <img src="http://localhost:51075/Uploads/Profile/@Model[i].ProfilePicture" alt="profile_image" class="avatar avatar-sm me-3 border-radius-lg">
+                                                    @* <img src="~/template/assets/img/team-2.jpg" class="avatar avatar-sm me-3 border-radius-lg" alt="user1">*@
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">@Html.DisplayFor(m => m[i].MemberName) &nbsp;@Html.DisplayFor(m => m[i].MemberSurname)</h6>
+                                                    <p class="text-xs text-secondary mb-0">@Html.DisplayFor(m => m[i].Mail)</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="align-middle">
+                                            <a href="/Profile/Profile/@Html.DisplayFor(m => m[i].MemberId)" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                                Profili Gör
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div>
+                                                    <img src="http://localhost:51075/Uploads/Profile/@Model[(Model.Count / 2) + i].ProfilePicture" alt="profile_image" class="avatar avatar-sm me-3 border-radius-lg">
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">@Html.DisplayFor(m => m[(Model.Count / 2) + i].MemberName) &nbsp;@Html.DisplayFor(m => m[(Model.Count / 2) + i].MemberSurname)</h6>
+                                                    <p class="text-xs text-secondary mb-0">@Html.DisplayFor(m => m[(Model.Count / 2) + i].Mail)</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="align-middle">
+                                            <a href="/Profile/Profile/@Html.DisplayFor(m => m[(Model.Count / 2) + i].MemberId)" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                                Profili Gör
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                                @if ((Model.Count / 2) != 0)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                <div>
+                                                    <img src="http://localhost:51075/Uploads/Profile/@Model[(Model.Count) - 1].ProfilePicture" alt="profile_image" class="avatar avatar-sm me-3 border-radius-lg">
+                                                </div>
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="mb-0 text-sm">@Html.DisplayFor(m => m[(Model.Count) - 1].MemberName) &nbsp;@Html.DisplayFor(m => m[(Model.Count) - 1].MemberSurname)</h6>
+                                                    <p class="text-xs text-secondary mb-0">@Html.DisplayFor(m => m[(Model.Count) - 1].Mail)</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="align-middle">
+                                            <a href="/Profile/Profile/@Html.DisplayFor(m => m[(Model.Count) - 1].MemberId)" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                                Profili Gör
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewBag.Title = "Application";
+    Layout = "~/Views/Shared/_LayoutForAdmin.cshtml";
+}
+
+
+@model List<HiFi.Dto.Dtos.ApplicationDto>
+
+<div class="container mt-5 ">
+    <div class="row">
+        <table class="display" id="basvurulistele">
+            <thead>
+                <tr>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ad</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-4"> Soyad</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-4"> Kullanıcı Adı</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Telefon</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Mail</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Başvuru Tarihi</th>
+                    <th class="text-secondary opacity-7"></th>
+                    <th class="text-secondary opacity-7"></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+        $('#basvurulistele').DataTable({
+            ajax: '/Application/GetAllApplications',
+            sAjaxDataProp: "",
+            columns: [
+                { "data": "AppName" },
+                { "data": "AppSurname" },
+                { "data": "Username" },
+                { "data": "Phone" },
+                { "data": "Mail" },
+                {
+                    "data": "applicationDate",
+                    "render": function (data, type, full) {
+                        if (data != null) {
+                            var dtStart = new Date(parseInt(data.substr(6)));
+                            return dtStart.toLocaleDateString();
+                        } else {
+                            return "";
+                        }
+
+
+                    }
+                },
+                { "data": "AppId", "render": function (data) { return '<button id="btnDelete", class="btn btn-success", onclick=AcceptApplication(' + data + ')>Onayla</button>' } },
+
+                { "data": "AppId", "render": function (data) { return '<button id="btnDelete", class="btn btn-warning", onclick=DeleteApplication(' + data + ')>Reddet</button>'; } }
+               
+            ]
+        });
+    });
+
+</script>
+
+
+
+<script>
+        function DeleteApplication(id) {
+            $.ajax({
+                url: '@Url.Action("DeleteApplication", "Application")/' + id,
+                datatype: 'JSON',
+                type: 'POST',
+                success: function(response) {
+                    response.toString();
+                    window.location.href = "/Application/Application/";
+                },
+                error: function() {
+                    response.toString();
+                }
+
+            });
+
+        }
+
+</script>
+
+<script>
+        function AcceptApplication(id) {
+            $.ajax({
+                url: '@Url.Action("Accept", "Application")/' + id,
+                datatype: 'JSON',
+                type: 'POST',
+                success: function(response) {
+                    response.toString();
+                    window.location.href = "/Application/Application/";
+
+                },
+                error: function() {
+                    response.toString();
+                }
+
+            });
+
+        }
+
+</script>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,80 @@
+﻿@using HiFi.Common.Helpers
+@model List<HiFi.Dto.SetupDto>
+
+
+@for (var i = 0; i < Model.Count(); i++)
+{   
+        <div class="card-body ">
+            <div class="input-group input-group-outline mb-3">
+                @(Html.TextBoxForControl(m=>@Model[i].SetupName, new {  placeholder = "Setup Adı" }))
+            </div>
+            <div class="input-group input-group-outline mb-3">
+             
+                <p>@Model[i].SetupDetail ... </p>
+            </div>
+
+            <div class="text-center">
+
+                <div class="text-center">
+                    <a href="#" class="view btn bg-gradient-primary btn-lg w-20 mt-2 mb-0 mb-3" data-toggle="modal" data-target="/ProfileSettingforAdmin/Singlesetup/@Model[i].SetupId">Düzenle</a>
+                </div>
+            </div>
+        </div>
+
+    
+}
+
+
+
+@*setup güncellme ve silme için modal*@
+
+<div class="modal fade" id="modelView" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">SETUP</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"  >&times;</span>
+                    </button>
+                </div>
+               
+                    <div class="modal-body">
+                        
+                    </div>
+               
+            </div>
+        </div>
+    </div>
+<script>
+    $(function () {
+        // a tagimizde bulunan .view classımıza click olduğunda
+        $("body").on("click", ".view", function () {
+            //data-target dan url mizi al
+            var url = $(this).data("target");
+            //bu urlimizi get et
+            $.get(url, function (data) { })
+                //eğer işlemimiz başarılı bir şekilde gerçekleşirse
+                .done(function (data) {
+                    //gelen datayı .modal-body mizin içerise html olarak ekle
+                    $("#modelView .modal-body").html(data);
+                    //sonra da modalimizi göster
+                    $("#modelView").modal("show");
+                })
+                //eğer işlem başarısız olursa
+                .fail(function () {
+                    //modalımızın bodysine Error! yaz
+                    $("#modelView .modal-body").text("Error!!");
+                    //sonra da modalimizi göster
+                    $("#modelView").modal("show");
+                })
+
+        });
+      
+
+    })
+</script>
+
+
+
+
+

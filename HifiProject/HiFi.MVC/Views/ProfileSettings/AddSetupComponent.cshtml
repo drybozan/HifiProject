@@ -1,0 +1,73 @@
+﻿@using System.Web.Mvc.Html
+@using HiFi.Common.Helpers
+@model  HiFi.Dto.SetupComponentDto
+
+@using (Html.BeginForm("AddSetupComponent", "ProfileSettings", FormMethod.Post, new { id = "addSetupComponentForm" }))
+{
+    <div class="form-group">
+        <label for="recipient-name" class="col-form-label">Setup</label>
+        @(Html.DropDownControlNoLabel(m => m.SetupId, new SelectList(ViewBag.Setups, "SetupId", "SetupName")))
+    </div>
+
+
+    <div class="form-group">
+        <label for="recipient-name" class="col-form-label">Kategori</label>
+        @(Html.DropDownControlNoLabel(m => m.CtgId, new SelectList(ViewBag.Categories, "CtgId", "CtgName")))
+    </div>
+
+    <div class="form-group">
+        @(Html.TextAreaForControl(m => m.CompDetail, new {  placeholder = "Hakkında", rows = "3" }))
+    </div>
+
+
+    <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Kaydet</button>
+
+
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+    </div>
+
+}
+@*<script>
+        $("#setups").on("change", function () {
+            var q = $("#setups").val();
+            console.log("setup ıd: "+q);
+        });
+    </script>
+    <script>
+        $("#categories").on("change", function () {
+            var c = $("#categories").val();
+            console.log("category:" + c);
+        });
+    </script>*@
+<script>
+    $("#addSetupComponentForm").submit(function (e) {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Değişiklikleri kaydetmek istiyor musunuz ?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Hayır',
+            confirmButtonText: 'Evet'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: this.action,
+                    type: 'post',
+                    data: new FormData(this),
+                    processData: false,
+                    contentType: false,
+                    success: function (result) {
+                        $("#modelViewforaddsetupcomponent .close").click();
+                        Swal.fire('İşlem Başarılı',
+                            result, 'success');
+                        location.reload(true);
+                    }
+                });
+            }
+        });
+    });
+</script>

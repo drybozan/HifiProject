@@ -1,0 +1,20 @@
+﻿@using HiFi.Common.Helpers
+
+@{
+    ViewBag.Title = "ErrorPage";
+    Layout = "~/Views/Shared/_ErrorPageLayout.cshtml";
+}
+
+<div class="notfound-404">
+    <div></div>
+    <h1>@Response.StatusCode</h1>
+</div>
+<h2>@ViewBag.text</h2>
+@if (SessionHelper.TokenInfo.token_type != null)
+{
+    <a href="/Member/Member">Home Page</a>
+}
+else
+{
+    <a href="/HomePage/Home">Home Page</a>
+}

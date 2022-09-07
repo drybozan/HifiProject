@@ -1,0 +1,88 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32228.343
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiFi.Api", "HiFi.Api\HiFi.Api.csproj", "{458D706A-7E8E-48ED-BC5C-A7EA4B76F910}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiFi.Common", "HiFi.Common\HiFi.Common.csproj", "{B8D78C60-B1D3-46F4-8B95-90D468FF85B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiFi.EF", "HiFi.EF\HiFi.EF.csproj", "{8C0499D2-8417-4FC8-B5C0-3E04758C9CE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiFi.Dto", "HiFi.Dto\HiFi.Dto.csproj", "{A85BE043-FD18-47C9-9958-F778554C545E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiFi.Repository", "HiFi.Repository\HiFi.Repository.csproj", "{110D732B-EA41-430D-A7AF-8FD95E10CB86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiFi.Services", "HiFi.Services\HiFi.Services.csproj", "{403CE2ED-8352-4267-A3C8-6C1CF8007613}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiFi.MVC", "HiFi.MVC\HiFi.MVC.csproj", "{D8FD071F-CE94-4EF2-A96D-43EB31F79AB8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{458D706A-7E8E-48ED-BC5C-A7EA4B76F910}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{458D706A-7E8E-48ED-BC5C-A7EA4B76F910}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{458D706A-7E8E-48ED-BC5C-A7EA4B76F910}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{458D706A-7E8E-48ED-BC5C-A7EA4B76F910}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8D78C60-B1D3-46F4-8B95-90D468FF85B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8D78C60-B1D3-46F4-8B95-90D468FF85B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8D78C60-B1D3-46F4-8B95-90D468FF85B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8D78C60-B1D3-46F4-8B95-90D468FF85B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C0499D2-8417-4FC8-B5C0-3E04758C9CE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C0499D2-8417-4FC8-B5C0-3E04758C9CE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C0499D2-8417-4FC8-B5C0-3E04758C9CE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C0499D2-8417-4FC8-B5C0-3E04758C9CE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A85BE043-FD18-47C9-9958-F778554C545E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A85BE043-FD18-47C9-9958-F778554C545E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A85BE043-FD18-47C9-9958-F778554C545E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A85BE043-FD18-47C9-9958-F778554C545E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{110D732B-EA41-430D-A7AF-8FD95E10CB86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{110D732B-EA41-430D-A7AF-8FD95E10CB86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{110D732B-EA41-430D-A7AF-8FD95E10CB86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{110D732B-EA41-430D-A7AF-8FD95E10CB86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{403CE2ED-8352-4267-A3C8-6C1CF8007613}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{403CE2ED-8352-4267-A3C8-6C1CF8007613}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{403CE2ED-8352-4267-A3C8-6C1CF8007613}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{403CE2ED-8352-4267-A3C8-6C1CF8007613}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8FD071F-CE94-4EF2-A96D-43EB31F79AB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8FD071F-CE94-4EF2-A96D-43EB31F79AB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8FD071F-CE94-4EF2-A96D-43EB31F79AB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8FD071F-CE94-4EF2-A96D-43EB31F79AB8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2FEA16D0-8198-4D2C-B6A1-649F457D5047}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 8
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://akare.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = HiFi.Api\\HiFi.Api.csproj
+		SccProjectName1 = HiFi.Api
+		SccLocalPath1 = HiFi.Api
+		SccProjectUniqueName2 = HiFi.Common\\HiFi.Common.csproj
+		SccProjectName2 = HiFi.Common
+		SccLocalPath2 = HiFi.Common
+		SccProjectUniqueName3 = HiFi.EF\\HiFi.EF.csproj
+		SccProjectName3 = HiFi.EF
+		SccLocalPath3 = HiFi.EF
+		SccProjectUniqueName4 = HiFi.Dto\\HiFi.Dto.csproj
+		SccProjectName4 = HiFi.Dto
+		SccLocalPath4 = HiFi.Dto
+		SccProjectUniqueName5 = HiFi.Repository\\HiFi.Repository.csproj
+		SccProjectName5 = HiFi.Repository
+		SccLocalPath5 = HiFi.Repository
+		SccProjectUniqueName6 = HiFi.MVC\\HiFi.MVC.csproj
+		SccProjectName6 = HiFi.MVC
+		SccLocalPath6 = HiFi.MVC
+		SccProjectUniqueName7 = HiFi.Services\\HiFi.Services.csproj
+		SccProjectName7 = HiFi.Services
+		SccLocalPath7 = HiFi.Services
+	EndGlobalSection
+EndGlobal

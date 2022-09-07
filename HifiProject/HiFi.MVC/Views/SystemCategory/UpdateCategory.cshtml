@@ -1,0 +1,22 @@
+﻿@using HiFi.Common.Helpers
+@model  HiFi.Dto.SystemCategoryDto
+
+@using (Html.BeginForm("UpdateCategory", "SystemCategory", FormMethod.Post))
+{
+    <div class="form-group">
+        <label for="recipient-name" class="col-form-label">Sistem Kategori</label>
+        @(Html.TextBoxForControl(m => m.CtgName, new {  placeholder = "System Kategori Adı" }))
+    </div>
+
+
+    @Html.HiddenFor(m => m.CtgId)
+
+
+    <button type="submit" class="btn btn-success">Kaydet</button>
+
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+    </div>
+}
+

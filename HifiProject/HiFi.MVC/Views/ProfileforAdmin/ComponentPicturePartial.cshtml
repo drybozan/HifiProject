@@ -1,0 +1,13 @@
+﻿@model List<HiFi.Dto.Dtos.CompPictureDto>
+
+@foreach (var item in Model)
+{
+
+    <div class="avatar me-3">
+        @*<img src="~/template/assets/img/kal-visuals-square.jpg" alt="kal" class="border-radius-lg shadow">*@
+        <p class="text-dark">@item.CompPicture</p>
+    </div>
+
+}
+
+

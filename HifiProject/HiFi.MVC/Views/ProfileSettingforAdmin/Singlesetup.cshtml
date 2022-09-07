@@ -1,0 +1,67 @@
+﻿@using HiFi.Common.Helpers
+@model  HiFi.Dto.SetupDto
+
+@using (Html.BeginForm("Singlesetup", "ProfileSettingforAdmin", FormMethod.Post))
+{
+
+    <div class="form-group">
+        <label for="recipient-name" class="col-form-label">Setup</label>
+        @(Html.TextBoxForControl(m => m.SetupName, new {  placeholder = "Setup Adı" }))
+    </div>
+    <div class="form-group">
+        <label for="message-text" class="col-form-label">Setup Hakkında</label>
+        @(Html.TextAreaForControl(m => m.SetupDetail, new { placeholder = "Setup Hakkında", rows = "5" }))
+    </div>
+
+    
+    <ul class="list-group">
+        <li class="list-group-item border-0 px-0">
+            <div class="form-check form-switch ps-0">
+                <input class="form-check-input ms-auto" type="checkbox" id="flexSwitchCheckDefault-1"  @Html.HiddenFor(m => m.SetupActive) />
+                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0" for="flexSwitchCheckDefault-1">Setupı Pasif Et</label>
+            </div>
+        </li>
+    </ul>
+   
+
+    @Html.HiddenFor(m=>m.MemberId)
+    @Html.HiddenFor(m=>m.SetupId)
+   
+    <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Kaydet</button>
+    <button type="button" class="btn btn-warning" onclick="DeleteSetup(@Model.SetupId)">Sil</button>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Vazgeç</button>
+    </div>
+
+}
+
+<script>
+    $("#flexSwitchCheckDefault-1").change(function () {
+        if ($(this).prop("checked")) {
+            $(this).val(false);
+        }
+        if ($(this).prop("unchecked")) {
+            $(this).val(true);
+        }
+    });
+</script>
+<script>
+    function DeleteSetup(id) {
+        $.ajax({
+            url: '@Url.Action("DeleteSetup", "ProfileSettingforAdmin")/' + id,
+            datatype: 'JSON',
+            type: 'POST',
+            success: function(response) {
+                response.toString();
+                //window.location.href = "/ProfileSettingforAdmin/setupSetting/";
+            },
+            error: function() {
+                response.toString();
+            }
+
+        });
+        
+    }
+ 
+</script>

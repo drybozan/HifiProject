@@ -1,0 +1,57 @@
+﻿@using (Html.BeginForm("AddComponentPictures", "ProfileSettings", FormMethod.Post, new { enctype = "multipart/form-data",id="addComponentPictureForm" }))
+{
+    <div id="thediv" class="mb-3"> </div>
+    <div class="my-auto mx-auto">
+        <input type="file" name="compPictureFiles" accept="image/*" id="inputFile3" multiple="multiple" />
+    </div>
+    <div class="text-center">
+        <input type="submit" class="btn btn-success" style="font-size: small" value="Gönder" />
+    </div>
+}
+<script>
+    function readURL(input) {
+        if (input.files) {
+            $('#thediv').empty();
+            var filesAmount = input.files.length;
+            for (var i = 0; i < filesAmount; i++) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+
+                    $('#thediv').prepend('<img src="' + e.target.result + '" width="100" height="100"/ class="me-3">');
+                }
+                reader.readAsDataURL(input.files[i]);
+            }
+        }
+    }
+    $("#inputFile3").change(function () {
+        readURL(this);
+    });
+    $("#addComponentPictureForm").submit(function (e) {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Değişiklikleri kaydetmek istiyor musunuz ?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Hayır',
+            confirmButtonText: 'Evet'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: this.action,
+                    type: 'post',
+                    data: new FormData(this),
+                    processData: false,
+                    contentType: false,
+                    success: function (result) {
+                        $("#modelViewforaddcompPicture .close").click();
+                        Swal.fire('İşlem Başarılı',
+                            result, 'success');
+                        location.reload(true);
+                    }
+                });
+            }
+        });
+    });
+</script>

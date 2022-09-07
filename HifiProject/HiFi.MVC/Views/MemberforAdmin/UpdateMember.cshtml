@@ -1,0 +1,52 @@
+﻿@using HiFi.Common.Helpers
+@model  HiFi.Dto.MemberDto
+
+@using (Html.BeginForm("UpdateMember", "MemberforAdmin", FormMethod.Post))
+{
+    <div class="form-group">
+        @(Html.TextBoxForControl(m => m.ProfilePicture, new { placeholder = "Üye Adı"}))
+    </div>
+  
+    <div class="form-group">
+        @(Html.TextBoxForControl(m => m.MemberName, new { placeholder = "Üye Adı"}))
+    </div>
+    <div class="form-group">
+        @(Html.TextBoxForControl(m => m.MemberSurname, new {  placeholder = "Üye Soyadı" }))
+    </div>
+    <div class="form-group">
+        @(Html.EMailControl(m => m.Mail))
+    </div>
+    <div class="form-group">
+        @(Html.TextBoxForControl(m => m.MemberPhone, new {  placeholder = "Telefon Numarası" }))
+    </div>
+    <div class="form-group">
+        @(Html.TextBoxForControl(m => m.EntryDate, new {  placeholder = "Katılım Tarihi"}))
+    </div>
+    <div class="form-group">
+        @(Html.TextAreaForControl(m => m.ProfileDetail, new {  placeholder = "Üye Hakkında", rows = "5" }))
+    </div>
+    <div class="form-group">
+        @(Html.TextBoxForControl(m => m.MemberActive, new {  placeholder = "Aktif/Pasif"}))
+    </div>
+
+    <div class="form-group">
+        @(Html.TextBoxForControl(m => m.Username, new { placeholder = "Kullanıcı Adı" }))
+    </div>
+    <div class="form-group">
+        @(Html.TextBoxForControl(m => m.Password, new {  placeholder = "Şifre"}))
+    </div>
+    <div class="form-group">
+        @(Html.TextBoxForControl(m => m.PasswordDuration, new {  placeholder = "Şifre Son Geçerlilik Tarihi" }))
+    </div>
+
+
+    @Html.HiddenFor(m => m.MemberId)
+    @Html.HiddenFor(m => m.UserType)
+
+    <button type="submit" class="btn btn-success" >Kaydet</button>
+
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+    </div>
+}

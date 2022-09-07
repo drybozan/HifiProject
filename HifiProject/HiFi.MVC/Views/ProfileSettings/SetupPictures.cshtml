@@ -1,0 +1,63 @@
+﻿@model List<HiFi.Dto.SetupPictureDto>
+
+@foreach (var item in Model)
+{
+    using (Html.BeginForm("SetupPictures/" + item.SetupPicId, "ProfileSettings", FormMethod.Post, new { enctype = "multipart/form-data" ,id="setupPicturesForm"}))
+    {
+        <div class="input-group input-group-outline mb-2">
+            <div class="my-auto">
+                <img id="image_upload_preview1" src="http://localhost:51075/Uploads/SetupPictures/@item.SetupPicture" width="75" height="75" />
+
+                <input type="file" name="SetupPicFile" accept="image/*" id="inputFile1" />
+                <button onclick="DeleteSetupPic(@item.SetupPicId)" class="btn btn-danger" style="font-size: 14px">Sil</button>
+                <button type="submit" class="btn btn-success" style="font-size: 14px">Kaydet</button>
+            </div>
+
+        </div>
+    }
+}
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#image_upload_preview1').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#inputFile1").change(function () {
+        readURL(this);
+    });
+    function DeleteSetupPic(id) {
+        $.ajax({
+            url: '@Url.Action("DeleteSetupPicture", "ProfileSettings")/' + id,
+            datatype: 'JSON',
+            type: 'POST',
+            success: function(result) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Bilgiler başarıyla silindi',
+                    text:result
+                });
+                location.reload(true);
+            }
+        });
+    }
+    $("#setupPicturesForm").submit(function (e) {
+
+        e.preventDefault();
+        $.ajax({
+            url: this.action,
+            type: 'post',
+            data: new FormData(this),
+            processData: false,
+            contentType: false,
+            success: function (result) {
+                Swal.fire('İşlem Başarılı',
+                    result, 'success');
+                location.reload(true);
+            }
+        });
+    });
+</script>

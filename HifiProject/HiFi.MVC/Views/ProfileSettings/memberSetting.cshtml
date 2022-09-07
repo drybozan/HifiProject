@@ -1,0 +1,108 @@
+﻿@using HiFi.Common.Helpers
+@model HiFi.MVC.ViewModels.ProfileSettingsMemberSettingVievModel
+@using (Html.BeginForm("memberSetting", "ProfileSettings", FormMethod.Post, new { id = "memberForm" }))
+{
+    <div class="card-body ">
+        <div class="input-group input-group-outline mb-3">
+            @(Html.TextBoxForControl(m => m.memberdtos.Username, new { placeholder = "Kullanıcı Adı" }))
+        </div>
+        <div class="input-group input-group-outline mb-3">
+            @(Html.EMailControl(m => m.memberdtos.Mail))
+        </div>
+        <div>
+            <p class="text-center text-bg-info fs-4"> Şifre Değiştirme</p>
+            <div class="input-group input-group-outline mb-3">
+                @(Html.PasswordControlClassic(m => m.oldPassword, new { placeholder = "Eski Şifre", @id = "oldPw", autocomplete = "off" }))
+            </div>
+
+            <div class="input-group input-group-outline mb-3">
+                @(Html.PasswordControlClassic(m => m.newPassword1, new { placeholder = "Yeni Şifre", @id = "newPw1", autocomplete = "off" }))
+            </div>
+            <div class="input-group input-group-outline mb-3">
+                @(Html.PasswordControlClassic(m => m.newPassword2, new { placeholder = "Yeni Şifre", @id = "newPw2", autocomplete = "off" }))
+            </div>
+        </div>
+        <div class="form-check form-switch ps-0">
+
+            @if (Model.memberdtos.MemberActive == null)
+            {
+                Model.memberdtos.MemberActive = false;
+            }
+            @Html.CheckBoxFor(m => m.memberdtos.MemberActive.Value, new { @class = "form-check-input ms-3" })
+            @Html.LabelFor(m => m.memberdtos.MemberActive, new { @class = "form-check-label text-body ms-3 my-auto text-truncate w-80 mb-0 fs-5" })
+            @*<input class="form-check-input ms-auto" type="checkbox" id="flexSwitchCheckDefault" @Html.HiddenFor(m => m.memberdtos.MemberActive)/>
+                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0" for="flexSwitchCheckDefault">Hesabı Pasif Et</label>*@
+        </div>
+        <div class="text-center">
+
+            <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-50 mt-4 mb-0 mb-3">Kaydet</button>
+        </div>
+        @Html.HiddenFor(m => m.memberdtos.MemberId)
+        @Html.HiddenFor(m => m.memberdtos.MemberPhone)
+        @Html.HiddenFor(m => m.memberdtos.MemberActive)
+        @Html.HiddenFor(m => m.memberdtos.EntryDate)
+        @Html.HiddenFor(m => m.memberdtos.MemberSurname)
+        @Html.HiddenFor(m => m.memberdtos.ProfileDetail)
+        @Html.HiddenFor(m => m.memberdtos.PasswordDuration)
+        @Html.HiddenFor(m => m.memberdtos.ProfilePicture)
+        @Html.HiddenFor(m => m.memberdtos.UserType)
+        @Html.HiddenFor(m => m.memberdtos.MemberName)
+        @Html.HiddenFor(m => m.memberdtos.Password)
+        @Html.HiddenFor(m => m.memberdtos.MemberId)
+    </div>
+}
+
+<script>
+    $("input[type=checkbox]").change(function () {
+        if ($(this).prop("checked")) {
+            $(this).val(false);
+        } else {
+            $(this).val(true);
+        }
+    });
+
+    $(function () {
+
+        $("#memberForm").submit(function (e) {
+
+            e.preventDefault();
+            Swal.fire({
+                title: 'Silmek istiyor musunuz ?',
+                icon: 'error',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Hayır',
+                confirmButtonText: 'Evet'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var str = $('#newPw1').val();
+                    var str2 = $('#newPw2').val();
+                    if (str === str2) {
+                        $.ajax({
+                            url: this.action,
+                            type: 'post',
+                            data: new FormData(this),
+                            processData: false,
+                            contentType: false,
+                            success: function (response) {
+                                if (result !="Bilgileriniz başarıyla kaydedilmiştir.") {
+                                    Swal.fire('İşlem Başarılı',
+                                        response, 'success');
+                                    location.reload(true);
+                                }
+                               else {
+                                    Swal.fire('Hata',
+                                        response, 'error');
+                                }
+                            }
+                        });
+                    }
+                    else {
+                        Swal.fire('Hata',
+                            'Girdiğiniz şifreler uyuşmuyor !!', 'error');
+                    }
+                }
+            });
+        });
+</script>

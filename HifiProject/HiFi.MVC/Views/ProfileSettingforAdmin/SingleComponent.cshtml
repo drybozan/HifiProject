@@ -1,0 +1,50 @@
+﻿@using HiFi.Common.Helpers
+@model  HiFi.Dto.SetupComponentDto
+
+@using (Html.BeginForm("SingleComponent", "ProfileSettingforAdmin", FormMethod.Post))
+{
+
+    <div class="form-group">
+        <label for="recipient-name" class="col-form-label">Kategori</label>
+        @(Html.TextBoxForControl(m => m.categoryName, new {  placeholder = "Parça Adı" }))
+    </div>
+    <div class="form-group">
+        <label for="message-text" class="col-form-label">System Component Hakkında</label>
+        @(Html.TextAreaForControl(m => m.CompDetail, new {  placeholder = "Hakkında",  rows = "5" }))
+    </div>
+
+
+    @Html.HiddenFor(m => m.MemberId)
+    @Html.HiddenFor(m => m.SetupId)
+    @Html.HiddenFor(m => m.CtgId)
+    @Html.HiddenFor(m => m.SetupName)
+    @Html.HiddenFor(m => m.CompId)
+    <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Kaydet</button>
+    <button type="button" class="btn btn-warning" onclick="DeleteComponent(@Model.CompId)">Sil</button>
+
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Vazgeç</button>
+    </div>
+
+}
+
+<script>
+    function DeleteComponent(id) {
+        $.ajax({
+            url: '@Url.Action("DeleteSetupComponent", "ProfileSettingforAdmin")/' + id,
+            datatype: 'JSON',
+            type: 'POST',
+            success: function(response) {
+                response.toString();
+                //window.location.href = "/ProfileSettingforAdmin/setupSetting/";
+            },
+            error: function() {
+                response.toString();
+            }
+
+        });
+
+    }
+
+</script>

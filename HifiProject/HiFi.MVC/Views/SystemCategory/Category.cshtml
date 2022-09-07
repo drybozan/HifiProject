@@ -1,0 +1,164 @@
+﻿
+@{
+    ViewBag.Title = "Category";
+    Layout = "~/Views/Shared/_LayoutForAdmin.cshtml";
+}
+
+@model List<HiFi.Dto.SystemCategoryDto>
+
+<div class="container mt-5 ">
+
+    <button type="button" class=" viewforaddcategory btn bg-success w-20 mt-2 text-bg-light" data-toggle="modal" data-target="/SystemCategory/AddCategory/">sistem kategori ekle</button>
+
+    <div class="row">
+        <table class="display" id="kategorilistele">
+            <thead>
+                <tr>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kategori</th>
+
+                    <th class="text-secondary opacity-7"></th>
+                    <th class="text-secondary opacity-7"></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+<script>
+
+    $(document).ready(function () {
+        $('#kategorilistele').DataTable({
+            ajax: '/SystemCategory/GetAllCategories',
+            sAjaxDataProp: "",
+            columns: [
+                { "data": "CtgName" },
+
+                {
+                    "data": "CtgId", "render": function (data) {
+                        return '<a href="#" class="viewforcategory btn btn-success" data-toggle="modal" data-target="/SystemCategory/UpdateCategory/' + data + '">Düzenle</a>'
+                    }
+                },
+
+                { "data": "CtgId", "render": function (data) { return '<button id="btnDelete", class="btn btn-warning", onclick=DeleteCategory(' + data + ')>Sil</button>'; } }
+
+            ]
+        });
+    });
+
+</script>
+@*kategori güncelleme için modal*@
+<div class="modal fade" id="modelViewforCategory" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> Düzenle</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        // .viewforcategory classımıza click olduğunda
+        $("body").on("click", ".viewforcategory", function () {
+            //data-target dan url mizi al
+            var url = $(this).data("target");
+            //bu urlimizi get et
+            $.get(url, function (data) { })
+                //eğer işlemimiz başarılı bir şekilde gerçekleşirse
+                .done(function (data) {
+                    //gelen datayı .modal-body mizin içerise html olarak ekle
+                    $("#modelViewforCategory .modal-body").html(data);
+                    //sonra da modalimizi göster
+                    $("#modelViewforCategory").modal("show");
+                })
+                //eğer işlem başarısız olursa
+                .fail(function () {
+                    //modalımızın bodysine Error! yaz
+                    $("#modelViewforCategory .modal-body").text("Error!!");
+                    //sonra da modalimizi göster
+                    $("#modelViewforCategory").modal("show");
+                })
+
+        });
+
+
+    })
+</script>
+@*kategori ekleme için modal*@
+<div class="modal fade" id="modelViewforAddCategory" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> EKLE </h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        // .viewforcategory classımıza click olduğunda
+        $("body").on("click", ".viewforaddcategory", function () {
+            //data-target dan url mizi al
+            var url = $(this).data("target");
+            //bu urlimizi get et
+            $.get(url, function (data) { })
+                //eğer işlemimiz başarılı bir şekilde gerçekleşirse
+                .done(function (data) {
+                    //gelen datayı .modal-body mizin içerise html olarak ekle
+                    $("#modelViewforAddCategory .modal-body").html(data);
+                    //sonra da modalimizi göster
+                    $("#modelViewforAddCategory").modal("show");
+                })
+                //eğer işlem başarısız olursa
+                .fail(function () {
+                    //modalımızın bodysine Error! yaz
+                    $("#modelViewforAddCategory .modal-body").text("Error!!");
+                    //sonra da modalimizi göster
+                    $("#modelViewforAddCategory").modal("show");
+                })
+
+        });
+
+
+    })
+</script>
+<script>
+    function DeleteCategory(id) {
+        $.ajax({
+            url: '@Url.Action("DeleteCategory", "SystemCategory")/' + id,
+            datatype: 'JSON',
+            type: 'POST',
+            success: function(response) {
+                response.toString();
+                window.location.href = "/SystemCategory/Category/";
+
+            },
+            error: function() {
+                response.toString();
+            }
+
+        });
+
+    }
+
+</script>
+
+

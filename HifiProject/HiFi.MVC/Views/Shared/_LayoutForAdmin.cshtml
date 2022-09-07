@@ -1,0 +1,124 @@
+﻿@using HiFi.Common.Helpers
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/template/assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="~/template/assets/img/favicon.png">
+
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+    <!-- Nucleo Icons -->
+    <link href="~/template/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="~/template/assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <!-- CSS Files -->
+    <link id="pagestyle" href="~/template/assets/css/material-dashboard.css?v=3.0.4" rel="stylesheet" />
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <!--Popup Lightbox Js-->
+
+    <script src="~/jquery-popup-lightbox-master/js/jquery.popup.lightbox.js"></script>
+
+    <!--Popup Lightbox CSS-->
+
+    <link href="~/jquery-popup-lightbox-master/css/popup-lightbox.css" rel="stylesheet" />
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!---datatable-->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    @*alert için*@
+    <script src="~/Scripts/sweetalert2.all.min.js"></script>
+    @*tarih dönüşümü için*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
+
+
+</head>
+
+<body class="g-sidenav-show bg-gray-200">
+    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
+
+        <hr class="horizontal light mt-0 mb-2">
+        <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link text-white " href="/MemberforAdmin/GetAllMembers/">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-user-circle opacity-10"></i>
+
+                        </div>
+                        <span class="nav-link-text ms-1">Kullanıcılar</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white " href="/Application/Application/">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">edit</i>
+
+                        </div>
+                        <span class="nav-link-text ms-1">Başvurular</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white " href="/SystemCategory/Category/">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">category</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Sistem Kategori</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white " href="/Log/Log/">
+                        <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons opacity-10">report</i>
+                        </div>
+                        <span class="nav-link-text ms-1">Log</span>
+                    </a>
+                </li>
+
+           
+            </ul>
+        </div>
+        <div class="sidenav-footer position-absolute w-100 bottom-0 ">
+            <div class="mx-3">
+                <a class="btn bg-gradient-primary mt-4 w-100" href="" type="button">ÇIKIŞ YAP</a>
+            </div>
+        </div>
+    </aside>
+    <div class="main-content position-relative max-height-vh-100 h-100">
+        <!-- Navbar -->
+        <!-- End Navbar -->
+        @RenderBody()
+
+    </div>
+
+    <!--   Core JS Files   -->
+    <script src="~/template/assets/js/core/popper.min.js"></script>
+    <script src="~/template/assets/js/core/bootstrap.min.js"></script>
+    <script src="~/template/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="~/template/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script>var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }</script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="~/template/assets/js/material-dashboard.min.js?v=3.0.4"></script>
+</body>
+
+</html>

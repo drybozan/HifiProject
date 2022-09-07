@@ -1,0 +1,28 @@
+﻿@using HiFi.Common.Helpers
+@model HiFi.Dto.MemberDto
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Index", "apideneme", FormMethod.Post, new { id = "addSetupForm" }))
+{
+    <div class="card-body ">
+        <div class="input-group input-group-outline mb-3">
+            <div class="form-group">
+                @*<label for="recipient-name" class="col-form-label">Setup</label>*@
+                @*@(Html.TextBoxFor(m => m.SetupName, new { @class = "form-control", placeholder = "Setup Adı", type = "text" }))*@
+                @Html.PhoneControl(m => m.MemberPhone)
+                
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        @*<label for="message-text" class="col-form-label">Setup Hakkında</label>*@
+        @Html.TextBoxForControl(m => m.PasswordDuration,new { rows = "5" ,cols="15"})
+        @* @(Html.TextAreaFor(m => m.SetupDetail, new { @class = "form-control", placeholder = "Setup Hakkında", type = "text", rows = "5" }))*@
+
+    </div>
+
+    <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Kaydet</button>
+
+}

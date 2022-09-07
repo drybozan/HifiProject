@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bf056020e8674931ab44a98204c20edd" Name="Diagram1" ZoomLevel="83">
+        <EntityTypeShape EntityType="HiFiDBModel.compPictureTBL" Width="1.5" PointX="5.375" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HiFiDBModel.logTBL" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HiFiDBModel.memberTBL" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HiFiDBModel.setupComponentTBL" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HiFiDBModel.setupPictureTBL" Width="1.5" PointX="5.125" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HiFiDBModel.setupTBL" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HiFiDBModel.sysdiagrams" Width="1.5" PointX="12.875" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HiFiDBModel.systemCategoryTBL" Width="1.5" PointX="3.125" PointY="6.25" IsExpanded="true" />
+        <AssociationConnector Association="HiFiDBModel.FK__compPictu__compI__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="HiFiDBModel.FK__logTBL__memberId__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="HiFiDBModel.FK__setupComp__membe__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="HiFiDBModel.FK__setupTBL__member__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="HiFiDBModel.FK__setupComp__ctgId__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="HiFiDBModel.FK__setupComp__setup__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="HiFiDBModel.FK__setupPict__setup__33D4B598" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="HiFiDBModel.applicationTBL" Width="1.5" PointX="7.25" PointY="5.75" />
+        <AssociationConnector Association="HiFiDBModel.FK_compPictureTBL_compPictureTBL" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
