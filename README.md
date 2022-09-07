@@ -8,3 +8,9 @@
 ![image](https://user-images.githubusercontent.com/86890722/188910786-6cab8c55-94a4-44fd-ba3f-dd0af133e67f.png)
 ![image](https://user-images.githubusercontent.com/86890722/188910837-413489ac-64b6-44c7-98df-f319b2f880b0.png)
 ![image](https://user-images.githubusercontent.com/86890722/188910903-b009eee2-bc1e-4651-b7e4-346395fa6089.png)
+# admin arayüzü
+![image](https://user-images.githubusercontent.com/86890722/188911222-89959e02-df77-4817-b6cd-def3ba92cae5.png)
+![image](https://user-images.githubusercontent.com/86890722/188911260-8c306fde-84a2-4a3e-8a24-e0595714d2ed.png)
+![image](https://user-images.githubusercontent.com/86890722/188911344-292622f3-1521-46f8-9c25-d09aaad1d996.png)
+![image](https://user-images.githubusercontent.com/86890722/188911363-eba0acbf-3ad0-48a5-919c-656bed228e63.png)
+![image](https://user-images.githubusercontent.com/86890722/188911379-50e42de3-d0cc-49ba-8e52-a0bc5a11deb4.png)
