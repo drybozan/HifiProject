@@ -1,4 +1,10 @@
 # HifiProject
+Katmanlı mimari yapısını kullanarak hazırlanmış bir ASP.Net MVC projesidir. Api, C# teknolojisi ile yazılıp servis ile MVC arayüzüne sunulmuştur.
+- AutoMapper
+- Entity Framework
+- .Net
+- Asp.Net MVC
+
 # kullanıcı arayüzü
 ![image](https://user-images.githubusercontent.com/86890722/188912182-c1b42f01-d6b3-44fe-ae01-c88ffd1f0df0.png)
 ![image](https://user-images.githubusercontent.com/86890722/188912243-ad71cb32-f069-4a07-963d-f3e0bbadaf35.png)
