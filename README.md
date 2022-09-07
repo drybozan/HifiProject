@@ -1,6 +1,7 @@
 # HifiProject
 # kullanıcı arayüzü
-
+![image](https://user-images.githubusercontent.com/86890722/188912182-c1b42f01-d6b3-44fe-ae01-c88ffd1f0df0.png)
+![image](https://user-images.githubusercontent.com/86890722/188912243-ad71cb32-f069-4a07-963d-f3e0bbadaf35.png)
 ![image](https://user-images.githubusercontent.com/86890722/188910614-8d6ef3e4-6750-4429-93fb-c92ffac5fafc.png)
 ![image](https://user-images.githubusercontent.com/86890722/188910633-44d8c86d-4c28-409a-a2a5-6db2be881c26.png)
 ![image](https://user-images.githubusercontent.com/86890722/188910670-a15057f4-b648-453d-b565-13068c0aa503.png)
