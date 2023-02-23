@@ -1,0 +1,205 @@
+﻿
+@{
+    ViewBag.Title = "Log";
+    Layout = "~/Views/Shared/_LayoutForAdmin.cshtml";
+}
+
+@model  HiFi.Dto.ModelForJson.LogModel
+
+
+<div class="container-fluid py-4">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card my-4">
+                <div class="card-body px-0 pb-2">
+                    <div class="table-responsive p-0">
+                        <label for="pagesize">Sayfalanacak veri adeti seçin : </label>
+                        <select id="pageSize">
+                            <option value="10" selected>10</option>
+                            <option value="30" >30</option>
+                            <option value="60" >60</option>
+                            <option value="100" >100</option>
+                        </select>
+                        <a  class="text-secondary font-weight-bold text-sm-center" href="/Log/Log">Listele</a>
+                        <table class="table align-items-center mb-0" id="logListele">
+
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">IP ADRES</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">KULANICI ADI</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Aktivite</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Log Tarihi</th>
+                                    <th class="text-secondary opacity-7"></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+  
+        $(document).ready(function () {
+            $.ajax({
+
+                url: '@Url.Action("GetLog", "Log")',
+                dataType: "json",
+                type: "Get",
+                success: function (data) {
+                    console.log(data)
+                    var tr;
+
+                    //her data için satır çizer
+                    for (var i = 0; i < data.Data.length; i++) {
+
+                        tr = $('<tr/>');
+                        tr.append("<td>" + data.Data[i].IpAddress + "</td>");
+                        tr.append("<td>" + data.Data[i].LogUsername + "</td>");
+                        tr.append("<td>" + data.Data[i].LogActivity + "</td>");
+
+                        //gelen tarihi dönüştürür
+                        var datam = moment(data.Data[i].LogDate)
+                        tr.append("<td>" + datam.format('HH:mm:ss DD/MM/YYYY ') + "</td>");
+                        tr.append('<td> <button type="button" class="btn btn-warning" onclick="DeleteLog(' + data.Data[i].LogId + ')" > Sil</button></td>');
+                        $('#logListele ').append(tr);
+                    }
+                    //sıradaki ve önceki datalar için button
+                    $('#logListele ').append('<td> <h7> Toplam Sayfa Sayısı : '+data.TotalPages+'</h7><td>');
+                    $('#logListele ').append('<td><h7>Sayfa : ' + data.PageNumber + ' </h7></td>');
+                   
+                    $('#logListele ').append('<td> <button type="button" class="btn btn-primary float-lg-end" onclick="SetPageNumber(' + (data.PageNumber - 1) + ')" > Önceki</button></td>');
+                    $('#logListele ').append('<td> <button type="button" class="btn btn-primary " onclick="SetPageNumber(' + (data.PageNumber + 1) + ')" > Sonraki</button></td>');
+
+                },
+                error: function (xhr) {
+                    alert('Data yok');
+                }
+            });
+        });
+
+    
+</script>
+
+
+<script>
+    function DeleteLog(id) {
+        $.ajax({
+            url: '@Url.Action("DeleteLog", "Log")/' + id,
+            datatype: 'JSON',
+            type: 'POST',
+            success: function(response) {
+                response.toString();
+                window.location.href = "/Log/Log/";
+            },
+            error: function() {
+                response.toString();
+            }
+
+        });
+
+    }
+</script>
+
+<script>
+    function SetPageNumber(number) {
+        $.ajax({
+            url: '@Url.Action("SetPageNumber", "Log")/' + number,
+            datatype: 'JSON',
+            type: 'POST',
+            success: function (response) {
+                console.log(response)
+               window.location.href = "/Log/Log/";
+            },
+            error: function(response) {
+                console.log(response)
+
+            }
+
+        });
+
+    }
+</script>
+@*dropdown menuden seçile verin sayısını alır*@
+<script>
+   
+        $('select').on('change', function () {
+            //seçilen değeri al
+            console.log('Changed option value ' + this.value);
+            var PageNumber = this.value;
+            $.ajax({
+                url: '@Url.Action("SetPageSize", "Log")/' + PageNumber,
+                datatype: 'JSON',
+                type: 'POST',
+                success: function (response) {
+                    console.log(response);
+
+                },
+                error: function () {
+                    response.toString();
+                }
+
+            });
+        });
+    
+</script>
+
+@*istenen veri adeti kadar data listelenir.*@
+@*<script>
+
+    function GetLogWithPageSize() {
+      //  $('#logListele ').load('/Log/GetLog/');
+       
+         $.ajax({
+
+               url: '@Url.Action("GetLog", "Log")',
+                dataType: "json",
+                type: "Get",
+                success: function (data) {
+                    console.log(data)
+                    var tr;
+                   
+                    //her data için satır çizer
+                    for (var i = 0; i < data.Data.length; i++) {
+
+                        tr = $('<tr/>');
+                        tr.append("<td>" + data.Data[i].IpAddress + "</td>");
+                        tr.append("<td>" + data.Data[i].LogUsername + "</td>");
+                        tr.append("<td>" + data.Data[i].LogActivity + "</td>");
+
+                        //gelen tarihi dönüştürür
+                        var datam = moment(data.Data[i].LogDate)
+                        tr.append("<td>" + datam.format('HH:mm:ss DD/MM/YYYY ') + "</td>");
+                        tr.append('<td> <button type="button" class="btn btn-warning" onclick="DeleteLog(' + data.Data[i].LogId + ')" > Sil</button></td>');
+                        $('#logListele ').append(tr);
+                    }
+                    //sıradaki ve önceki datalar için button
+                    $('#logListele ').append('<td> <h7> Toplam Sayfa Sayısı : ' + data.TotalPages + '</h7><td>');
+                    $('#logListele ').append('<td><h7>Sayfa : ' + data.PageNumber + ' </h7></td>');
+                    $('#logListele ').append('<td> <button type="button" class="btn btn-primary float-lg-end" onclick="SetPageNumber(' + (data.PageNumber - 1) + ')" > Önceki</button></td>');
+                    $('#logListele ').append('<td> <button type="button" class="btn btn-primary " onclick="SetPageNumber(' + (data.PageNumber + 1) + ')" > Sonraki</button></td>');
+
+                   
+
+             },
+                error: function (xhr) {
+                    alert('Data yok');
+                }
+         });
+       
+    }
+
+
+</script>*@
+
+
