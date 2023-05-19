@@ -25,14 +25,13 @@ namespace HiFi.EF.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<applicationTBL> applicationTBL { get; set; }
         public virtual DbSet<compPictureTBL> compPictureTBL { get; set; }
         public virtual DbSet<logTBL> logTBL { get; set; }
         public virtual DbSet<memberTBL> memberTBL { get; set; }
         public virtual DbSet<setupComponentTBL> setupComponentTBL { get; set; }
         public virtual DbSet<setupPictureTBL> setupPictureTBL { get; set; }
         public virtual DbSet<setupTBL> setupTBL { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<systemCategoryTBL> systemCategoryTBL { get; set; }
-        public virtual DbSet<applicationTBL> applicationTBL { get; set; }
     }
 }

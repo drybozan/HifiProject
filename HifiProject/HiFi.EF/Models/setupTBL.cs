@@ -27,7 +27,6 @@ namespace HiFi.EF.Models
         public Nullable<bool> setupActive { get; set; }
         public string setupDetail { get; set; }
     
-        public virtual memberTBL memberTBL { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<setupComponentTBL> setupComponentTBL { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

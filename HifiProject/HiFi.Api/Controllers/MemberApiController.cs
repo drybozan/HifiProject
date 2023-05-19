@@ -23,14 +23,7 @@ namespace HiFi.Api.Controllers
             return ms.GetAllMembers();
         }
 
-        //[Route("api/MemberApi/Test")]
-        //[HttpPost]
-        //public string Test([FromUri]string mail)
-        //{
-        //    return ms.GetAllMembers();
-        //}
-
-        //Veritabanındaki gönderilen id'ye ait veri listeler.
+    
         // GET api/<controller>/5
         public string Get(int id)
         {

@@ -19,7 +19,6 @@ namespace HiFi.EF.Models
         {
             this.logTBL = new HashSet<logTBL>();
             this.setupComponentTBL = new HashSet<setupComponentTBL>();
-            this.setupTBL = new HashSet<setupTBL>();
         }
     
         public int memberId { get; set; }
@@ -40,7 +39,5 @@ namespace HiFi.EF.Models
         public virtual ICollection<logTBL> logTBL { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<setupComponentTBL> setupComponentTBL { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<setupTBL> setupTBL { get; set; }
     }
 }

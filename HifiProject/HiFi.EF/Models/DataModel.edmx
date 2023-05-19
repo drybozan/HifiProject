@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="HiFiDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="HiFiDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="applicationTBL">
           <Key>
             <PropertyRef Name="appId" />
@@ -89,16 +89,6 @@
           <Property Name="setupActive" Type="bit" />
           <Property Name="setupDetail" Type="nvarchar(max)" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="systemCategoryTBL">
           <Key>
             <PropertyRef Name="ctgId" />
@@ -121,7 +111,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__logTBL__memberId__2F10007B">
-          <End Role="memberTBL" Type="Self.memberTBL" Multiplicity="0..1" />
+          <End Role="memberTBL" Type="Self.memberTBL" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="logTBL" Type="Self.logTBL" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="memberTBL">
@@ -208,7 +200,6 @@
           <EntitySet Name="setupComponentTBL" EntityType="Self.setupComponentTBL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="setupPictureTBL" EntityType="Self.setupPictureTBL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="setupTBL" EntityType="Self.setupTBL" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="systemCategoryTBL" EntityType="Self.systemCategoryTBL" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__compPictu__compI__34C8D9D1" Association="Self.FK__compPictu__compI__34C8D9D1">
             <End Role="setupComponentTBL" EntitySet="setupComponentTBL" />
@@ -239,10 +230,30 @@
             <End Role="compPictureTBL1" EntitySet="compPictureTBL" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HiFiDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="applicationTBL">
+          <Key>
+            <PropertyRef Name="appId" />
+          </Key>
+          <Property Name="appId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="surname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="memberActive" Type="Boolean" />
+          <Property Name="applicationDate" Type="DateTime" Precision="3" />
+          <Property Name="userType" Type="Int32" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="mail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="passwordDuration" Type="DateTime" Precision="0" />
+          <Property Name="profilePicture" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="profileDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="isDelete" Type="Boolean" />
+        </EntityType>
         <EntityType Name="compPictureTBL">
           <Key>
             <PropertyRef Name="compPicId" />
@@ -251,8 +262,8 @@
           <Property Name="compId" Type="Int32" />
           <Property Name="compPicture" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="setupComponentTBL" Relationship="Self.FK__compPictu__compI__34C8D9D1" FromRole="compPictureTBL" ToRole="setupComponentTBL" />
-          <NavigationProperty Name="compPictureTBL1" Relationship="HiFiDBModel.FK_compPictureTBL_compPictureTBL" FromRole="compPictureTBL" ToRole="compPictureTBL1" />
-          <NavigationProperty Name="compPictureTBL2" Relationship="HiFiDBModel.FK_compPictureTBL_compPictureTBL" FromRole="compPictureTBL1" ToRole="compPictureTBL" />
+          <NavigationProperty Name="compPictureTBL1" Relationship="Self.FK_compPictureTBL_compPictureTBL" FromRole="compPictureTBL" ToRole="compPictureTBL1" />
+          <NavigationProperty Name="compPictureTBL2" Relationship="Self.FK_compPictureTBL_compPictureTBL" FromRole="compPictureTBL1" ToRole="compPictureTBL" />
         </EntityType>
         <EntityType Name="logTBL">
           <Key>
@@ -285,7 +296,6 @@
           <Property Name="profileDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="logTBL" Relationship="Self.FK__logTBL__memberId__2F10007B" FromRole="memberTBL" ToRole="logTBL" />
           <NavigationProperty Name="setupComponentTBL" Relationship="Self.FK__setupComp__membe__31EC6D26" FromRole="memberTBL" ToRole="setupComponentTBL" />
-          <NavigationProperty Name="setupTBL" Relationship="Self.FK__setupTBL__member__300424B4" FromRole="memberTBL" ToRole="setupTBL" />
         </EntityType>
         <EntityType Name="setupComponentTBL">
           <Key>
@@ -319,19 +329,8 @@
           <Property Name="setupName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="setupActive" Type="Boolean" />
           <Property Name="setupDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="memberTBL" Relationship="Self.FK__setupTBL__member__300424B4" FromRole="setupTBL" ToRole="memberTBL" />
           <NavigationProperty Name="setupComponentTBL" Relationship="Self.FK__setupComp__setup__30F848ED" FromRole="setupTBL" ToRole="setupComponentTBL" />
           <NavigationProperty Name="setupPictureTBL" Relationship="Self.FK__setupPict__setup__33D4B598" FromRole="setupTBL" ToRole="setupPictureTBL" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="systemCategoryTBL">
           <Key>
@@ -342,7 +341,9 @@
           <NavigationProperty Name="setupComponentTBL" Relationship="Self.FK__setupComp__ctgId__32E0915F" FromRole="systemCategoryTBL" ToRole="setupComponentTBL" />
         </EntityType>
         <Association Name="FK__compPictu__compI__34C8D9D1">
-          <End Role="setupComponentTBL" Type="Self.setupComponentTBL" Multiplicity="0..1" />
+          <End Role="setupComponentTBL" Type="Self.setupComponentTBL" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="compPictureTBL" Type="Self.compPictureTBL" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="setupComponentTBL">
@@ -353,8 +354,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_compPictureTBL_compPictureTBL">
+          <End Role="compPictureTBL" Type="Self.compPictureTBL" Multiplicity="1" />
+          <End Role="compPictureTBL1" Type="Self.compPictureTBL" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="compPictureTBL">
+              <PropertyRef Name="compPicId" />
+            </Principal>
+            <Dependent Role="compPictureTBL1">
+              <PropertyRef Name="compPicId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__logTBL__memberId__2F10007B">
-          <End Role="memberTBL" Type="Self.memberTBL" Multiplicity="0..1" />
+          <End Role="memberTBL" Type="Self.memberTBL" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="logTBL" Type="Self.logTBL" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="memberTBL">
@@ -366,7 +381,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__setupComp__membe__31EC6D26">
-          <End Role="memberTBL" Type="Self.memberTBL" Multiplicity="0..1" />
+          <End Role="memberTBL" Type="Self.memberTBL" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="setupComponentTBL" Type="Self.setupComponentTBL" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="memberTBL">
@@ -377,20 +394,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__setupTBL__member__300424B4">
-          <End Role="memberTBL" Type="Self.memberTBL" Multiplicity="0..1" />
-          <End Role="setupTBL" Type="Self.setupTBL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="memberTBL">
-              <PropertyRef Name="memberId" />
-            </Principal>
-            <Dependent Role="setupTBL">
-              <PropertyRef Name="memberId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__setupComp__ctgId__32E0915F">
-          <End Role="systemCategoryTBL" Type="Self.systemCategoryTBL" Multiplicity="0..1" />
+          <End Role="systemCategoryTBL" Type="Self.systemCategoryTBL" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="setupComponentTBL" Type="Self.setupComponentTBL" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="systemCategoryTBL">
@@ -402,7 +409,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__setupComp__setup__30F848ED">
-          <End Role="setupTBL" Type="Self.setupTBL" Multiplicity="0..1" />
+          <End Role="setupTBL" Type="Self.setupTBL" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="setupComponentTBL" Type="Self.setupComponentTBL" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="setupTBL">
@@ -414,7 +423,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__setupPict__setup__33D4B598">
-          <End Role="setupTBL" Type="Self.setupTBL" Multiplicity="0..1" />
+          <End Role="setupTBL" Type="Self.setupTBL" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="setupPictureTBL" Type="Self.setupPictureTBL" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="setupTBL">
@@ -426,17 +437,21 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="HiFiDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="applicationTBL" EntityType="Self.applicationTBL" />
           <EntitySet Name="compPictureTBL" EntityType="Self.compPictureTBL" />
           <EntitySet Name="logTBL" EntityType="Self.logTBL" />
           <EntitySet Name="memberTBL" EntityType="Self.memberTBL" />
           <EntitySet Name="setupComponentTBL" EntityType="Self.setupComponentTBL" />
           <EntitySet Name="setupPictureTBL" EntityType="Self.setupPictureTBL" />
           <EntitySet Name="setupTBL" EntityType="Self.setupTBL" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="systemCategoryTBL" EntityType="Self.systemCategoryTBL" />
           <AssociationSet Name="FK__compPictu__compI__34C8D9D1" Association="Self.FK__compPictu__compI__34C8D9D1">
             <End Role="setupComponentTBL" EntitySet="setupComponentTBL" />
             <End Role="compPictureTBL" EntitySet="compPictureTBL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_compPictureTBL_compPictureTBL" Association="Self.FK_compPictureTBL_compPictureTBL">
+            <End Role="compPictureTBL" EntitySet="compPictureTBL" />
+            <End Role="compPictureTBL1" EntitySet="compPictureTBL" />
           </AssociationSet>
           <AssociationSet Name="FK__logTBL__memberId__2F10007B" Association="Self.FK__logTBL__memberId__2F10007B">
             <End Role="memberTBL" EntitySet="memberTBL" />
@@ -445,10 +460,6 @@
           <AssociationSet Name="FK__setupComp__membe__31EC6D26" Association="Self.FK__setupComp__membe__31EC6D26">
             <End Role="memberTBL" EntitySet="memberTBL" />
             <End Role="setupComponentTBL" EntitySet="setupComponentTBL" />
-          </AssociationSet>
-          <AssociationSet Name="FK__setupTBL__member__300424B4" Association="Self.FK__setupTBL__member__300424B4">
-            <End Role="memberTBL" EntitySet="memberTBL" />
-            <End Role="setupTBL" EntitySet="setupTBL" />
           </AssociationSet>
           <AssociationSet Name="FK__setupComp__ctgId__32E0915F" Association="Self.FK__setupComp__ctgId__32E0915F">
             <End Role="systemCategoryTBL" EntitySet="systemCategoryTBL" />
@@ -462,49 +473,33 @@
             <End Role="setupTBL" EntitySet="setupTBL" />
             <End Role="setupPictureTBL" EntitySet="setupPictureTBL" />
           </AssociationSet>
-          <EntitySet Name="applicationTBL" EntityType="HiFiDBModel.applicationTBL" />
-          <AssociationSet Name="FK_compPictureTBL_compPictureTBL" Association="HiFiDBModel.FK_compPictureTBL_compPictureTBL">
-            <End Role="compPictureTBL" EntitySet="compPictureTBL" />
-            <End Role="compPictureTBL1" EntitySet="compPictureTBL" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="applicationTBL">
-          <Key>
-            <PropertyRef Name="appId" />
-          </Key>
-          <Property Name="appId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="surname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="memberActive" Type="Boolean" />
-          <Property Name="applicationDate" Type="DateTime" Precision="3" />
-          <Property Name="userType" Type="Int32" />
-          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="mail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="passwordDuration" Type="DateTime" Precision="0" />
-          <Property Name="profilePicture" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="profileDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="isDelete" Type="Boolean" />
-        </EntityType>
-        <Association Name="FK_compPictureTBL_compPictureTBL">
-          <End Type="HiFiDBModel.compPictureTBL" Role="compPictureTBL" Multiplicity="1" />
-          <End Type="HiFiDBModel.compPictureTBL" Role="compPictureTBL1" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="compPictureTBL">
-              <PropertyRef Name="compPicId" />
-            </Principal>
-            <Dependent Role="compPictureTBL1">
-              <PropertyRef Name="compPicId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="HiFiDBModelStoreContainer" CdmEntityContainer="HiFiDBEntities">
+          <EntitySetMapping Name="applicationTBL">
+            <EntityTypeMapping TypeName="HiFiDBModel.applicationTBL">
+              <MappingFragment StoreEntitySet="applicationTBL">
+                <ScalarProperty Name="appId" ColumnName="appId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="memberActive" ColumnName="memberActive" />
+                <ScalarProperty Name="applicationDate" ColumnName="applicationDate" />
+                <ScalarProperty Name="userType" ColumnName="userType" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="passwordDuration" ColumnName="passwordDuration" />
+                <ScalarProperty Name="profilePicture" ColumnName="profilePicture" />
+                <ScalarProperty Name="profileDetail" ColumnName="profileDetail" />
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="compPictureTBL">
             <EntityTypeMapping TypeName="HiFiDBModel.compPictureTBL">
               <MappingFragment StoreEntitySet="compPictureTBL">
@@ -576,42 +571,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="HiFiDBModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="systemCategoryTBL">
             <EntityTypeMapping TypeName="HiFiDBModel.systemCategoryTBL">
               <MappingFragment StoreEntitySet="systemCategoryTBL">
                 <ScalarProperty Name="ctgId" ColumnName="ctgId" />
                 <ScalarProperty Name="ctgName" ColumnName="ctgName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="applicationTBL">
-            <EntityTypeMapping TypeName="HiFiDBModel.applicationTBL">
-              <MappingFragment StoreEntitySet="applicationTBL">
-                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
-                <ScalarProperty Name="profileDetail" ColumnName="profileDetail" />
-                <ScalarProperty Name="profilePicture" ColumnName="profilePicture" />
-                <ScalarProperty Name="passwordDuration" ColumnName="passwordDuration" />
-                <ScalarProperty Name="mail" ColumnName="mail" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="userType" ColumnName="userType" />
-                <ScalarProperty Name="applicationDate" ColumnName="applicationDate" />
-                <ScalarProperty Name="memberActive" ColumnName="memberActive" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="surname" ColumnName="surname" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="appId" ColumnName="appId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

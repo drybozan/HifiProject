@@ -20,7 +20,7 @@ namespace HiFi.MVC.Controllers
         public ActionResult Signin()
         {
             ViewBag.Msg = TempData["msg"];
-       
+            //ViewBag.Message = TempData["sign"];
             return View();
         }
 
@@ -33,10 +33,25 @@ namespace HiFi.MVC.Controllers
             {
                 SessionHelper.TokenInfo = token;
                 SessionHelper.LoggedUserInfo = ts.GetLoggedUser();
-              
+                //MemberService ms = new MemberService();
+                //var member = ms.GetSingleMember(SessionHelper.LoggedUserInfo.MemberId);
+                //TimeSpan difference = member.PasswordDuration.Value.Subtract(DateTime.Today);
+                //double diff= difference.TotalDays;
+                //if ( diff<= 0)
+                //{
+                //    TempData["msg"] = "Şifrenizin son kullanma tarihi geçtiğinden dolayı yeni şifre mail adresinize gönderilmiştir.";
+                //    ms.SendMailPassword(member.Mail);
+                //    Session.Clear();
+                //    Session.Abandon();
+                //    Session.RemoveAll();
+                //    FormsAuthentication.SignOut();
+                //    return RedirectToAction("Signin");
+                //}
+                //else
+                //{
                 FormsAuthentication.SetAuthCookie(SessionHelper.LoggedUserInfo.MemberName, false);
                 return RedirectToAction("Member", "Member");
-                
+                //}
             }
             else
             {
